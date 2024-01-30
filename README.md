@@ -50,6 +50,15 @@
 - GPT Search bar
 - Multi-language feature 
 - Integrate GPT APIs
+- get open ai api key
+- get search api call
+- fetched gpt movie suggestions from tmdb
+- created gpt slice added data
+- resused movie list component to make movie suggestion container
+- memoization
+- added .env file
+- adding .env file to gitignore
+- made our site responsive
 
 
 # Features

@@ -87,16 +87,18 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <Header />
-      <img
-        className="absolute"
-        src={BG_IMAGE_URL}
-        alt="background-image"
-      />
+      <div className="absolute">
+        <img
+          className="md:w-screen object-cover h-screen w-screen"
+          src={BG_IMAGE_URL}
+          alt="background-image"
+        />
+      </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="flex flex-col absolute bg-black bg-opacity-80 p-14 rounded-md w-3/12 my-40 mx-auto left-0 right-0 text-white"
+        className="w-9/12 md:w-3/12  absolute bg-black bg-opacity-80 p-12 rounded-md  my-40 mx-auto left-0 right-0 text-white"
       >
         <h1 className="font-bold text-3xl mt-0 pb-4 my-2">
           {isSignIn ? "Sign In" : "Sign Up"}
@@ -107,7 +109,7 @@ const Login = () => {
             ref={name}
             type="text"
             placeholder="Name"
-            className="p-3 my-2 rounded-sm bg-gray-800"
+            className="p-3 my-2 rounded-sm bg-gray-800  w-full"
           />
         )}
 
@@ -115,14 +117,14 @@ const Login = () => {
           ref={email}
           type="text"
           placeholder="E-mail"
-          className="p-3 my-2 rounded-sm bg-gray-800"
+          className="p-3 my-2 rounded-sm bg-gray-800  w-full"
         />
 
         <input
           ref={passowrd}
           type="password"
           placeholder="Password"
-          className="p-3 my-2 rounded-sm  bg-gray-800 "
+          className="p-3 my-2 rounded-sm  bg-gray-800  w-full "
         />
 
         {/*!isSignIn && (
