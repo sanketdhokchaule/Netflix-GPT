@@ -7,7 +7,6 @@ import { API_OPTIONS } from "../utils/constants";
 import { addGptMovieResult } from "../utils/gptSlice";
 
 const GPTSearchBar = () => {
-
   const dispatch = useDispatch();
 
   const langKey = useSelector((store) => store.config.lang);
@@ -19,7 +18,7 @@ const GPTSearchBar = () => {
       "https://api.themoviedb.org/3/search/movie?query=" +
         movie +
         "&include_adult=false&language=en-US&page=1",
-        API_OPTIONS
+      API_OPTIONS
     );
 
     const json = await data.json();
@@ -28,23 +27,29 @@ const GPTSearchBar = () => {
   };
 
   const handleGptSearchClick = async () => {
-    const gptQuery =
-      "Act as a movie recommendation system and suggest some movies for the query " +
-      searchText.current.value +
-      "only give me names of 5 movies, comma separated like the expample given ahead. example Result: Gadar, Don, Sholay, Dhoom, KGF";
+    try {
+      const gptQuery =
+        "Act as a movie recommendation system and suggest some movies for the query " +
+        searchText.current.value +
+        "only give me names of 5 movies, comma separated like the expample given ahead. example Result: Gadar, Don, Sholay, Dhoom, KGF";
 
-    const gptResult = await openai.chat.completions.create({
-      messages: [{ role: "user", content: gptQuery }],
-      model: "gpt-3.5-turbo",
-    });
+      const gptResult = await openai.chat.completions.create({
+        messages: [{ role: "user", content: gptQuery }],
+        model: "gpt-3.5-turbo",
+      });
 
-    const gptMovies = gptResult.choices?.[0]?.message?.content.split(", ");
+      const gptMovies = gptResult.choices?.[0]?.message?.content.split(", ");
 
-    const promiseArray = gptMovies.map(movie=>searchMovieTMDB(movie));
+      const promiseArray = gptMovies.map((movie) => searchMovieTMDB(movie));
 
-    const tmdbResults = await Promise.all(promiseArray);
+      const tmdbResults = await Promise.all(promiseArray);
 
-    dispatch(addGptMovieResult({movieNames:gptMovies, movieResults:tmdbResults}));
+      dispatch(
+        addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults })
+      );
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   return (
