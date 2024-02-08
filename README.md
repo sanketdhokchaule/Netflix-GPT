@@ -1,4 +1,4 @@
-# Netflix-GPT
+# Online_Movies
 - Its a clone of netflix 
 - openai api has been used in the project to search for the movie
 - It is a fully responsive website 
